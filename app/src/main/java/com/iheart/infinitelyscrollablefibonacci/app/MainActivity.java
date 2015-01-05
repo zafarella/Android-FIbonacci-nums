@@ -11,8 +11,6 @@ import android.widget.ListView;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * created by z1
@@ -23,9 +21,8 @@ public class MainActivity extends Activity {
     // adapter for the list
     private ArrayAdapter<String> adapter;
 
-    // the fibonacci number to start with.
-    private int whereWeAre = 0;
-
+    // initial Fibonacci numbers - by default they will not come to UI as next is calculated.
+    private static BigInteger fib1 = BigInteger.ZERO, fib2=BigInteger.ONE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,7 @@ public class MainActivity extends Activity {
 
         // Fill initial Fibonacci 50 items
         for (short i = 0; i < 50; i++) {
-            adapter.add(getFibNum(whereWeAre++).toString());
+            adapter.add(getFibNum().toString());
         }
 
         listView.setAdapter(adapter);
@@ -63,30 +60,15 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * TODO: optimize further..
-     * @param n
-     * @param m
-     * @return
+     *  Returns next Fibonacci number. Two previous are stored in the class fields fib1 and fib2.
+     * @return Next Fibonacci number in current session.
      */
-    private static BigInteger getFibNum(int n, Map<Integer, BigInteger> m) {
-        if (m.containsKey(n)) {
-            return m.get(n);
-        }
-        BigInteger result = n <= 0 ? BigInteger.ZERO : n == 1 ? BigInteger.ONE : getFibNum(n - 2, m).add(getFibNum(n - 1, m));
-        m.put(n, result);
+    private static BigInteger getFibNum() {
+        BigInteger result = fib1.add(fib2);
+        fib1 = fib2;
+        fib2 = result;
         return result;
     }
-
-    /**
-     *
-     * @param n
-     * @return
-     */
-    private static BigInteger getFibNum(int n) {
-        HashMap<Integer, BigInteger> previous = new HashMap<Integer, BigInteger>();
-        return getFibNum(n, previous);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,13 +89,13 @@ public class MainActivity extends Activity {
      * Will generate next numbers on separate thread
      */
     private class GenerateNextNumbers extends AsyncTask<Void, Void, Void> {
-        private String[] numbers ;
+        private String[] numbers;
 
         @Override
         protected Void doInBackground(Void... params) {
                numbers = new String[3];
             for (short i = 0; i < 3; i++) {
-                numbers[i] = getFibNum(whereWeAre++).toString();
+                numbers[i] = getFibNum().toString();
                 if (isCancelled()) {
                     break;
                 }
