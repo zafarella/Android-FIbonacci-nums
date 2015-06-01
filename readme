@@ -7,14 +7,13 @@ I don't really remember why I did this project.
 Follow gradle build procedure. The project uses wrapper so, just do
 
 ```
-gradle assembleRelease
+./gradlew assembleRelease
 ```
 for release or
 
 ```
-gradle assembleDebug
+./gradlew assembleDebug
 ```
 for debug. It will give you apks to run in simulator.
 
-ohh, you have to have gradle installed.
 
