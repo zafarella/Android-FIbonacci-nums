@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
     private ArrayAdapter<String> adapter;
 
     // initial Fibonacci numbers - by default they will not come to UI as next is calculated.
-    private static BigInteger fib1 = BigInteger.ZERO, fib2=BigInteger.ONE;
+    private static BigInteger fib1 = BigInteger.ZERO, fib2 = BigInteger.ONE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,8 @@ public class MainActivity extends Activity {
     }
 
     /**
-     *  Returns next Fibonacci number. Two previous are stored in the class fields fib1 and fib2.
+     * Returns next Fibonacci number. Two previous are stored in the class fields fib1 and fib2.
+     *
      * @return Next Fibonacci number in current session.
      */
     private static BigInteger getFibNum() {
@@ -93,7 +94,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected Void doInBackground(Void... params) {
-               numbers = new String[3];
+            numbers = new String[3];
             for (short i = 0; i < 3; i++) {
                 numbers[i] = getFibNum().toString();
                 if (isCancelled()) {
