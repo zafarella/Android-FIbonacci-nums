@@ -1,5 +1,5 @@
 
-Stupid app of generating infinite Fibonacci numbers - yes, we love Italy!
+Android app of generating infinite Fibonacci numbers!
 
 I don't really remember why I did this project.
 
