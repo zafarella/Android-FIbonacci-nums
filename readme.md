@@ -1,5 +1,5 @@
 
-Android app of generating infinite Fibonacci numbers!
+Android app of generating infinite Fibonacci numbers and have smooth scrolling!
 
 I don't really remember why I did this project.
 
